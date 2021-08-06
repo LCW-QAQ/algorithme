@@ -2,7 +2,7 @@ package sort;
 
 /**
  * 找出给定数组中, 左边比右边大两倍的数有多少个
- * arr[i] > arr[i + x] * 2, x > i
+ * arr[i] &gt; arr[i + x] * 2, x &gt; i
  */
 public class MergeSort_GreaterThanDouble {
 

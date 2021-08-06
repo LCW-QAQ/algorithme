@@ -2,7 +2,7 @@ package sort;
 
 /**
  * 求给定数组中有几个右边比左边小的数
- * [i, arr.length) 范围上, arr[i + x] < arr[i], x > i
+ * [i, arr.length) 范围上, arr[i + x] &lt; arr[i], x &gt; i
  */
 public class MergeSort_ReversePair {
     public static void main(String[] args) {

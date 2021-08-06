@@ -10,7 +10,7 @@ public class MergeSort {
     /**
      * 递归实现
      *
-     * @param arr
+     * @param arr 数组
      */
     public static void sort(int[] arr) {
         if (arr.length <= 1) return;
@@ -20,7 +20,7 @@ public class MergeSort {
     /**
      * 迭代实现
      *
-     * @param arr
+     * @param arr 数组
      */
     public static void sort2(int[] arr) {
         if (arr.length <= 1) return;
@@ -49,11 +49,19 @@ public class MergeSort {
         }
     }
 
+    /**
+     * 一定要记录左右是否完成, 因为归并的条件是两个有序数组归并, 所以一定要等待左右都排好了才能merge
+     */
     static class Help {
-        int l;
-        int r;
-        boolean lcompleted;
-        boolean rcompleted;
+        int l; // 左边界
+        int r; // 右边界
+        boolean lcompleted; // 左边是否完成
+        boolean rcompleted; // 右边是否完成
+
+        public Help(int l, int r) {
+            this.l = l;
+            this.r = r;
+        }
 
         public Help(int l, int r, boolean lcompleted, boolean rcompleted) {
             this.l = l;
@@ -71,11 +79,68 @@ public class MergeSort {
                     ", rcompleted=" + rcompleted +
                     '}';
         }
+
+        /**
+         * 左右边子数组, 完成排序
+         * 我们优先判断左边是否完成, 那么在栈迭代中, 也必须先判断左边, 完成右边的前提是左边完成了
+         */
+        public void complete() {
+            if (lcompleted) {
+                rcompleted = true;
+            } else {
+                lcompleted = true;
+            }
+        }
     }
 
     /**
-     * 递归改迭代
-     * @param arr
+     * 归并排序 栈迭代 by myself
+     *
+     * @param arr 需要排序的数组
+     */
+    public static void sort4(int[] arr) {
+        if (arr.length < 2) return;
+
+        Stack<Help> stack = new Stack<>();
+        stack.push(new Help(0, arr.length - 1));
+        while (!stack.empty()) {
+            Help help = stack.peek();
+
+            // 子过程已完成, 只有一个元素
+            if (help.l == help.r) {
+                stack.pop();
+                // 告诉栈顶, 他的左右某一个子过程完成了
+                stack.peek().complete();
+                continue;
+            }
+
+            int m = (help.l + help.r) / 2;
+
+            // 左边没完成, 就继续压栈左边
+            if (!help.lcompleted) {
+                stack.push(new Help(help.l, m));
+                continue;
+            }
+
+            // 右边没完成, 就继续压栈右边
+            if (!help.rcompleted) {
+                stack.push(new Help(m + 1, help.r));
+                continue;
+            }
+
+            // 两边都排好了, 当然直接merge
+            merge(arr, help.l, m, help.r);
+            // 当前区间已经merge, 没用了
+            stack.pop();
+            // 告诉栈顶, 你的左右某一边完成了
+            if (!stack.empty()) stack.peek().complete();
+        }
+    }
+
+    /**
+     * 栈迭代
+     *
+     * @param arr 数组
      */
     public static void sort3(int[] arr) {
         if (arr.length <= 1) return;
@@ -151,14 +216,12 @@ public class MergeSort {
 
     public static void main(String[] args) {
         int[] arr = Stream.generate(() -> new Random().nextInt(1000))
-                .limit(10)
+                .limit(10000)
                 .flatMapToInt(IntStream::of)
                 .toArray();
         int[] std = arr.clone();
-        sort3(arr);
+        sort4(arr);
         Arrays.sort(std);
         System.out.println(Arrays.equals(std, arr));
-        System.out.println(Arrays.toString(std));
-        System.out.println(Arrays.toString(arr));
     }
 }
