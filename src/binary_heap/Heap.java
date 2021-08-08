@@ -134,13 +134,14 @@ public class Heap {
 
     public static void checkHeapSort() {
         Integer[] arr = IntStream.generate(() -> new Random().nextInt(10000))
-                .limit(1000)
+                .limit(10)
                 .boxed()
                 .toArray(Integer[]::new);
         Integer[] std = arr.clone();
         Arrays.sort(std);
         heapSort(arr);
         System.out.println(Arrays.equals(std, arr));
+        System.out.println(Arrays.toString(arr));
     }
 
     public static void checkBinaryHeap() {
