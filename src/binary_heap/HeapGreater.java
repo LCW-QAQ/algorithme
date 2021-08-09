@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class HeapGreater<T extends HeapGreater.Wrapper<?>> {
+public class HeapGreater<T /*extends HeapGreater.Wrapper<?>*/> {
     private ArrayList<T> heap;
     private HashMap<T, Integer> indexMap;
     private Comparator<T> cmp;
@@ -66,11 +66,17 @@ public class HeapGreater<T extends HeapGreater.Wrapper<?>> {
 
     /**
      * 将给定索引的元素, 正确的堆化
+     *
      * @param index 索引
      */
-    private void resign(Integer index) {
+    public void resign(Integer index) {
         heapInsert(index);
         heapify(index);
+    }
+
+    public void resign(T t) {
+        heapInsert(indexMap.get(t));
+        heapify(indexMap.get(t));
     }
 
     /**
