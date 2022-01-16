@@ -16,7 +16,8 @@ def get_rightmost_one(num):
 
 
 num = 10
-print(f"num: {num}, num_bin: {bin(num)}, num_rightmost_num: {get_rightmost_one(num)}, num_rightmost_num_bin: {bin(get_rightmost_one(num))}")
+print(
+    f"num: {num}, num_bin: {bin(num)}, num_rightmost_num: {get_rightmost_one(num)}, num_rightmost_num_bin: {bin(get_rightmost_one(num))}")
 
 
 # 一个数组中有两种数出现了奇数次，其他数都出现了偶数次，怎么找到并打印这两种数
@@ -41,12 +42,12 @@ print(find_two_odd_num(arr))
 
 # 出现任意K, M次
 def find_num_km(arr, k, m):
-    '''
+    """
     一个数组中有一种数出现K次，其他数都出现了M次，
     M > 1,  K < M
     找到，出现了K次的数，
     要求，额外空间复杂度O(1)，时间复杂度O(N)
-    '''
+    """
     bits_arr = [0] * 32
     for num in arr:
         for i in range(0, 32):

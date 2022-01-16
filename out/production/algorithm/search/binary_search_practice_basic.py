@@ -40,7 +40,7 @@ def local_min(arr):
     给定一个数组, 相邻两数不相等
     如果i=0, arr[i] < arr[i + 1] 则i索引的数为局部最小值
     如果i=len(arr), arr[i] < arr[i - 1] 则i索引的数为局部最小值
-    如果arr[i] < arr[i - 1] && arr[i] < arr[i + 1], (i > 0 && i < len(arr) - 1), 则i索引的数为局部最小值
+    如果arr[i] < arr[i - 1] && arr[i] < arr[i + 1], (i > 0 && i < len(arr)), 则i索引的数为局部最小值
     '''
     if len(arr) == 0:
         return -1

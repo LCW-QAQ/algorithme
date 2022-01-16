@@ -2,7 +2,7 @@ package sort;
 
 /**
  * 求给定数组中, 所有左边小于右边的数的和
- * [0, i)范围上, arr[i-x] &lt; arr[i], 所有满足条件数的和, x &lt; i
+ * [0, i)范围上, arr[i-x] < arr[i], 所有满足条件数的和, x < i
  */
 public class MergeSort_SmallSum {
     public static int algorithm(int[] arr) {
