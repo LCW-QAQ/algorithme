@@ -3,7 +3,7 @@
 """
 
 
-def merge(arr: [int], l: int, m: int, r: int) -> int:
+def merge(arr: list[int], l: int, m: int, r: int) -> int:
     """将arr[l:r]排好序的同时, 返回小和"""
     ans = 0
     temp = [0] * (r - l + 1)
@@ -25,7 +25,7 @@ def merge(arr: [int], l: int, m: int, r: int) -> int:
     return ans
 
 
-def process(arr: [int], l: int, r: int) -> int:
+def process(arr: list[int], l: int, r: int) -> int:
     """返回arr[l:r]的小和"""
     if l == r:
         # 左边没数返回0
@@ -34,11 +34,11 @@ def process(arr: [int], l: int, r: int) -> int:
     return process(arr, l, m) + process(arr, m + 1, r) + merge(arr, l, m, r)
 
 
-def small_sum(arr: [int]) -> int:
-    """
+def small_sum(arr: list[int]) -> int:
+    """归并排序实现
     无序 | 小和 小于右边数的和 小于 排序
     归并, 快排
-    TODO: 2022/1/6 尝试使用快排解决小和问题
+    尝试使用快排解决小和问题, 结果: 无法使用快排实现, 归并的过程是两个有序数组, 同时满足之前的相对顺序, 而快排无法保证
     """
     return process(arr, 0, len(arr) - 1)
 
