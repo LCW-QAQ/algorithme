@@ -53,6 +53,7 @@ public class MergeSort_GreaterThanDouble {
 
     public static void main(String[] args) {
         int[] arr = {8, 2, 1, 7, 4, 2, 3};
+        System.out.println(algorithm(arr.clone()));
         System.out.println(algorithm(arr.clone()) == algorithmIter(arr.clone()));
     }
 }
