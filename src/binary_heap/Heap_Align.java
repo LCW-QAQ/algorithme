@@ -112,7 +112,40 @@ public class Heap_Align {
         }
     }
 
+    public static void heapSort(int[] arr) {
+        // 建立堆, 将arr转换为二叉堆结构
+        // 将arr变成大根堆
+        // 从上向下建立堆 时间复杂度 O(N * logN)
+        for (int i = 0; i < arr.length; i++) {
+            heapInsert(arr, i, false);
+        }
+
+        /*
+        从下向上建立堆 时间复杂度是O(N), 因为从下向上每次都会进来一个新元素, 而不是在原来的基础上堆化
+        for (int i = arr.length - 1; i >= 0; i--) {
+            heapify(arr, i, arr.length, false);
+        }
+        */
+        int heapSize = arr.length;
+        AlgorithmUtil.swap(arr, 0, --heapSize);
+        while (heapSize > 0) {
+            heapify(arr, 0, heapSize, false);
+            AlgorithmUtil.swap(arr, 0, --heapSize);
+        }
+    }
+
     public static void main(String[] args) {
+        final int[] arr = AlgorithmUtil.genRandomArray(1000000, 0, 1000000);
+        final int[] a1 = arr.clone();
+        final int[] a2 = arr.clone();
+        long start = System.currentTimeMillis();
+        Arrays.sort(a1);
+        System.out.println(System.currentTimeMillis() - start);
+        start = System.currentTimeMillis();
+        heapSort(a2);
+        System.out.println(System.currentTimeMillis() - start);
+        System.out.println(Arrays.equals(a1, a2));
+        System.out.println("------------------------");
         final BinaryHeap heap = new BinaryHeap(true);
         for (int i = 100; i > -1; i--) {
             heap.push(i);
