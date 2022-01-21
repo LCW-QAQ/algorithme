@@ -31,6 +31,7 @@ def is_palindrome_by_pointer(head):
     """判断链表是否回文, 使用快慢指针"""
     if head is None:
         return True
+    ans = True
     fast, slow = head, head
     # 找中点, 退出while时slow就是中点(唯一中点或上中点)
     while fast.next_n is not None and fast.next_n.next_n is not None:
@@ -53,19 +54,29 @@ def is_palindrome_by_pointer(head):
     l, r = head, pre
     while l and r:
         if l.value != r.value:
-            return False
+            ans = False
+            break
         l = l.next_n
         r = r.next_n
 
     # 将右边的链表调回去
+    last = pre  # 右边链表的头节点
     pre = None
-    while pre:
-        next_n = pre.next_n
-        pre.next_n = pre
-        pre = pre
-        pre = next_n
+    while last:
+        next_n = last.next_n
+        last.next_n = pre
+        pre = last
+        last = next_n
 
-    return True
+    return ans
+
+
+def node_iter_print(node):
+    while node is not None:
+        print(node, end=" ")
+        node = node.next_n
+    # 记得换行, joker
+    print()
 
 
 if __name__ == '__main__':
@@ -73,5 +84,7 @@ if __name__ == '__main__':
     n2 = Node(0, Node(1, Node(1, Node(1))))
     assert is_palindrome_by_container(n1)
     assert is_palindrome_by_pointer(n1)
+    node_iter_print(n1)
     assert not is_palindrome_by_container(n2)
     assert not is_palindrome_by_pointer(n2)
+    node_iter_print(n2)
