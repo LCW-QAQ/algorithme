@@ -1,7 +1,7 @@
 """
 计算最多有多少条线段重合, 线段两端都是整数, 且重合长度必须>=1
 """
-import sortedcontainers as st
+import sortedcontainers as stc
 
 
 def max_line_cover_iter(lines: list[list[int]]) -> int:
@@ -28,8 +28,8 @@ def max_line_cover_iter(lines: list[list[int]]) -> int:
 def max_line_cover(lines: list[list[int]]) -> int:
     lines.sort()
     ans = 0
-    # 新建一个有序列表 (貌似是用跳表实现), 我只需要将它当成小根堆用
-    s = st.SortedList()
+    # 新建一个小根堆
+    s = stc.SortedList()
     for line in lines:
         # 若s还有值(里面的值代表之前线段的结尾), 且之前线段的结尾 <= 当前线段的起始位置, 自然不会重合, 弹出
         while s and s[0] <= line[0]:

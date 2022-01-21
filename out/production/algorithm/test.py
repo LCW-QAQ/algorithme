@@ -1,13 +1,23 @@
-import random
-
 from utils.algorithm_util import *
 
-import sortedcontainers as st
+import random
+import sortedcontainers as stc
+import queue
 import collections
+import heapq
+import bisect
 
-d = st.SortedDict()
-d["hello"] = 0
-d["a"] = 0
-d["j"] = 0
-d["b"] = 0
-print(d)
+
+def fib(n):
+    if n == 1 or n == 2:
+        return 1
+    return fib(n - 1) + fib(n - 2)
+
+
+@perf_stdout
+def test():
+    return fib(45)
+
+
+if __name__ == '__main__':
+    print(test())

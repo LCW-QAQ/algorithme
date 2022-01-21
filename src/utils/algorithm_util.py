@@ -1,6 +1,7 @@
 import functools
 import random
 import time
+from typing import *
 
 
 def perf_stdout(fn):
@@ -17,7 +18,7 @@ def perf_stdout(fn):
     return wrapper
 
 
-def gen_random_arr(length: int = 100000, min_val: int = 0, max_val: int = 1000) -> list[int]:
+def gen_random_arr(length: int = 100000, min_val: int = 0, max_val: int = 1000) -> List[int]:
     """生成指定长度的随机数组
     :param length: 随机数组的长度
     :param min_val: 随机数的最小值, 包含min_val
