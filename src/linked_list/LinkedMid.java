@@ -40,13 +40,14 @@ public class LinkedMid {
 
     /**
      * 获取长度是偶数的链表的后中点
+     *
      * @param head
      * @return
      */
     public static Node getAfterMidInEven(Node head) {
         return getPreMidInEven(head).next;
     }
-
+    
     public static void main(String[] args) {
         Node head = new Node(0);
         Node n1 = new Node(1);
