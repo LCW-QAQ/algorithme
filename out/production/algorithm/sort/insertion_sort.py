@@ -1,5 +1,6 @@
 import sort_util
 
+
 def sort(arr):
     for i in range(1, len(arr)):
         for j in range(i, 0, -1):

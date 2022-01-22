@@ -1,6 +1,6 @@
 package tree;
 
-// 找到给定节点的后继后继节点, 后继节点就是中序遍历中x的下一个节点
+// 找到给定节点的后继节点, 后继节点就是中序遍历中x的下一个节点
 public class TreeSuccessor {
 
     static class Node<T> {
