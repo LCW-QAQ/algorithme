@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Optional
 
+# https://leetcode-cn.com/problems/balanced-binary-tree/
 
 @dataclass
 class Node:
@@ -16,6 +17,13 @@ class Info:
 
 
 def is_balance_binary_tree(root: Node) -> bool:
+    """判断是否是平衡二叉树
+    衡二叉树指的是左右子树高度差<=1
+    状态信息:
+        x is balance
+        x.left is balance and x.right is balance
+        x.height
+    """
     return process(root).is_balance
 
 
