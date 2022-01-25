@@ -1,21 +1,42 @@
 import functools
 import random
+import sys
 import time
 from typing import *
 
 
-def perf_stdout(fn):
-    if not callable(fn):
-        raise Exception("not a callable")
+def logit(logfile='out.log'):
+    def logging_decorator(func):
+        @functools.wraps(func)
+        def wrapped_function(*args, **kwargs):
+            log_string = func.__name__ + " was called"
+            print(log_string)
+            # 打开logfile，并写入内容
+            with open(logfile, 'a') as opened_file:
+                # 现在将日志打到指定的logfile
+                opened_file.write(log_string + '\n')
+            return func(*args, **kwargs)
 
-    @functools.wraps(fn)
-    def wrapper(*args, **kwargs):
-        start = time.perf_counter()
-        res = fn(*args, **kwargs)
-        print(f"function.__name__ = {fn.__name__}, 耗时 {time.perf_counter() - start}")
-        return res
+        return wrapped_function
 
-    return wrapper
+    return logging_decorator
+
+
+def perf_stdout(fn=None, file=sys.stdout):
+    def wrap(fn):
+        @functools.wraps(fn)
+        def wrapper(*args, **kwargs):
+            start = time.perf_counter()
+            res = fn(*args, **kwargs)
+            print(f"{fn.__module__}:{fn.__name__}, 耗时 {time.perf_counter() - start}", file=file)
+            return res
+
+        return wrapper
+
+    if fn is None:
+        return wrap
+
+    return wrap(fn)
 
 
 def gen_random_arr(length: int = 100000, min_val: int = 0, max_val: int = 1000) -> List[int]:
