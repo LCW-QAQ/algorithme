@@ -31,3 +31,33 @@ def is_complete_binary_tree(root: Node) -> bool:
         if not node.left or not node.right:
             flag = True
     return True
+
+
+def is_complete_binary_tree_by_treedp_template(root: Node) -> bool:
+    """判断一个树是否是完全二叉树, 树形dp套路版
+    state info:
+        x is cbt
+
+    """
+
+    @dataclass
+    class Info:
+        is_full: bool
+        is_cbt: bool
+        height: int
+
+    def process(node):
+        if not node:
+            return Info(True, True, 0)
+        linfo = process(node.left)
+        rinfo = process(node.right)
+
+        is_full = linfo.is_full and rinfo.is_full and linfo.height == rinfo.height
+        height = max(linfo.height, rinfo.height) + 1
+        is_cbt = is_full or (linfo.is_cbt and rinfo.is_full and linfo.height == rinfo.height + 1) or (
+                linfo.is_full and rinfo.is_full and linfo.height == rinfo.height + 1) or (
+                         linfo.is_full and rinfo.is_cbt and linfo.height == rinfo.height)
+
+        return Info(is_full, is_cbt, height)
+
+    return process(root).is_cbt

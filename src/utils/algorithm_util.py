@@ -6,7 +6,7 @@ from typing import *
 
 def perf_stdout(fn):
     if not callable(fn):
-        raise Exception("not a function")
+        raise Exception("not a callable")
 
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
