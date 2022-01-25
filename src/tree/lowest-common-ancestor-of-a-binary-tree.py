@@ -54,6 +54,39 @@ def dfs(node, a, b):
         return l_have or r_have
 
 
+def dfs_by_map(root, a, b):
+    parent = {}
+    ck = set()
+
+    def dfs_save_to_map(node):
+        """记录每个节点的父节点"""
+        if not node:
+            return
+        if node.left:
+            parent[node.left] = node
+            dfs_save_to_map(node.left)
+        if node.right:
+            parent[node.right] = node
+            dfs_save_to_map(node.right)
+
+    parent[root] = None
+    dfs_save_to_map(root)
+
+    node = a
+    ck.add(node)
+    # 将a节点向上一直到root串起来
+    while parent[node]:
+        node = parent[node]
+        ck.add(node)
+
+    node = b
+    # 从b节点向上找, 与a的路线汇聚时返回
+    while node not in ck:
+        node = parent[node]
+
+    return node
+
+
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         """二叉树的最近公共祖先
@@ -69,4 +102,4 @@ class Solution:
                     ab分别在x.left或x.right, ans is x
                     x is (a or b), ans is x
         """
-        return dfs(root, p, q)
+        return dfs_by_map(root, p, q)
