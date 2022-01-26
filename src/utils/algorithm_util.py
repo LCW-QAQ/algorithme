@@ -39,7 +39,7 @@ def perf_stdout(fn=None, file=sys.stdout):
     return wrap(fn)
 
 
-def gen_random_arr(length: int = 100000, min_val: int = 0, max_val: int = 1000) -> List[int]:
+def gen_random_arr(*, length: int = 1000, min_val: int = 0, max_val: int = 1000) -> List[int]:
     """生成指定长度的随机数组
     :param length: 随机数组的长度
     :param min_val: 随机数的最小值, 包含min_val
