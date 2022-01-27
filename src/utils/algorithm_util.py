@@ -54,6 +54,12 @@ def gen_random_arr(*, length: int = 1000, min_val: int = 0, max_val: int = 1000)
 
 def gen_random_dimensional2_arr(inner_length: int, length: int = 1000, min_val: int = 0, max_val: int = 1000) \
         -> List[List[int]]:
+    """生成随机数字二维数组
+    :param inner_length: 内部数组的长度
+    :param length: 外部数组的长度
+    :param min_val: 随机数的最小值, 包含min_val
+    :param max_val: 随机数的最大值, 包含max_val
+    """
     arr = []
     for i in range(length):
         arr.append([random.randint(min_val, max_val) for _ in range(inner_length)])
