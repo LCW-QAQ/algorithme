@@ -52,6 +52,14 @@ def gen_random_arr(*, length: int = 1000, min_val: int = 0, max_val: int = 1000)
     return arr
 
 
+def gen_random_dimensional2_arr(inner_length: int, length: int = 1000, min_val: int = 0, max_val: int = 1000) \
+        -> List[List[int]]:
+    arr = []
+    for i in range(length):
+        arr.append([random.randint(min_val, max_val) for _ in range(inner_length)])
+    return arr
+
+
 def gen_random_alphabet_str_arr(min_str_len: int = 0, max_str_len: int = 10, length: int = 100) -> List[str]:
     """生成随机字符串数组, 字符串只包含大小写字母
     :param min_str_len: 字符串最小长度
