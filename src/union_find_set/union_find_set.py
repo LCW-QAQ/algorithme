@@ -20,7 +20,7 @@ class UnionFindSet:
             self.parent_map[node] = node
             self.size_map[node] = 1
 
-    def find_head(self, node):
+    def find_head(self, node) -> Node:
         """返回给定节点所在集合的头节点
         在找到头节点后, 会将node-head的链条扁平化
         """
@@ -34,7 +34,7 @@ class UnionFindSet:
             self.parent_map[stack.pop()] = node
         return node
 
-    def same(self, a, b):
+    def same(self, a, b) -> bool:
         """判断两个值是否在同一个集合中"""
         return self.find_head(self.nodes[a]) == self.find_head(self.nodes[b])
 
