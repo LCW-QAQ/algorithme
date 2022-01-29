@@ -1,19 +1,21 @@
 from typing import Iterable, Any, Dict
 
 
-class Node:
-    def __init__(self, val: Any):
-        self.val = val
-
-
 class UnionFindSet:
+    class Node:
+        def __init__(self, val: Any):
+            self.val = val
+
+        def __str__(self) -> str:
+            return f"{{{self.val}}}"
+
     def __init__(self, iterable: Iterable[Any]):
-        self.nodes: Dict[Any, Node] = {}
-        self.parent_map: Dict[Node, Node] = {}
-        self.size_map: Dict[Node, int] = {}
+        self.nodes: Dict[Any, UnionFindSet.Node] = {}
+        self.parent_map: Dict[UnionFindSet.Node, UnionFindSet.Node] = {}
+        self.size_map: Dict[UnionFindSet.Node, int] = {}
 
         for item in iterable:
-            node = Node(item)
+            node = UnionFindSet.Node(item)
             self.nodes[item] = node
             self.parent_map[node] = node
             self.size_map[node] = 1
