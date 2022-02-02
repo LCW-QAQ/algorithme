@@ -1,8 +1,5 @@
-import collections
-from dataclasses import dataclass
-from utils.algorithm_util import *
-from tkinter import *
-from tkinter import ttk
+import os
 
 if __name__ == '__main__':
-    print("hello")
+    for i in os.walk("."):
+        print(i)
