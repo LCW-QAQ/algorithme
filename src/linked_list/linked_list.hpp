@@ -1,20 +1,20 @@
 #pragma once
 
-template<typename T>
+template<typename _T>
 class Node {
 public:
-    T value;
+    _T value;
     Node* next;
     Node* prev;
 
-    explicit Node(T value) : value(value), next(nullptr), prev(nullptr) {}
+    explicit Node(_T value) : value(value), next(nullptr), prev(nullptr) {}
 };
 
-template<typename T>
+template<typename _T>
 class LinkedList {
 private:
-    Node<T>* head;
-    Node<T>* tail;
+    Node<_T>* head;
+    Node<_T>* tail;
     int size;
 
 public:
@@ -22,8 +22,8 @@ public:
 
     ~LinkedList() {
         if (head != nullptr) {
-            Node<T>* begin = head;
-            Node<T>* end = tail + 1;
+            Node<_T>* begin = head;
+            Node<_T>* end = tail + 1;
             while (begin != end) {
                 delete begin;
                 begin++;
@@ -31,12 +31,12 @@ public:
         }
     }
 
-    void push_back(const T& value) {
-        Node<T>* newNode = new Node<T>(value);
+    void push_back(const _T& value) {
+        Node<_T>* newNode = new Node<_T>(value);
         if (head == nullptr) {
             head = tail = newNode;
         } else {
-            Node<T>* temp = tail;
+            Node<_T>* temp = tail;
             tail = newNode;
             temp->next = tail;
             tail->prev = temp;
@@ -44,12 +44,12 @@ public:
         size++;
     }
 
-    void push_front(const T& value) {
-        Node<T>* newNode = new Node<T>(value);
+    void push_front(const _T& value) {
+        Node<_T>* newNode = new Node<_T>(value);
         if (head == nullptr) {
             head = tail = newNode;
         } else {
-            Node<T>* temp = head;
+            Node<_T>* temp = head;
             head = newNode;
             temp->prev = newNode;
             head->next = newNode;
@@ -85,11 +85,11 @@ public:
         }
     }
 
-    T& front() {
+    _T& front() {
         return head->value;
     }
 
-    T& back() {
+    _T& back() {
         return tail->value;
     }
 };
