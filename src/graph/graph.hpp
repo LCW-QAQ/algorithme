@@ -103,12 +103,6 @@ Graph<int> createGraph(vector<vector<int>>& matrix) {
   return graph;
 }
 
-class A {
- public:
-  virtual void sayHello() { cout << "hello" << endl; }
-  virtual void sayHello2() { cout << "hello2" << endl; }
-};
-
 /* int main() {
   cout << "hello" << endl;
   while (true) {
