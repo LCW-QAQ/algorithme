@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/**
+ * @brief 图的拓扑排序
+ * bfs实现
+ */
 vector<Node<int>*> sortedTopology(Graph<int> graph) {
   vector<Node<int>*> ans;
   deque<Node<int>*> zeroQ;
