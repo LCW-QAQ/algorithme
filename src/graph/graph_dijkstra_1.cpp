@@ -51,6 +51,7 @@ Node<int>* get_min_distance_and_unselected_node(
     unordered_set<Node<int>*>& node_set) {
   int min_distance = 0;
   Node<int>* min_node = nullptr;
+  // 暴力迭代所有节点, 找到没有决定距离的最小节点, 时间复杂度O(N)很高
   for (auto& [node, distance] : distance_map) {
     // 没有确定距离 && 距离更小
     if (!node_set.count(node) && distance < min_distance) {
