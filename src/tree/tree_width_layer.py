@@ -16,7 +16,7 @@ def tree_width_layer(root: Node) -> int:
     max_width = 0
     # 当前层的宽度
     cur_width = 0
-    cur_end, next_end = None, None
+    cur_end, next_end = root, None
     q.append(root)
     while q:
         node = q.popleft()
