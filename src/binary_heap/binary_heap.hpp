@@ -5,8 +5,10 @@ class BinaryHeap {
  private:
   std::vector<T> heap;
 
+  _Cmp value_cmp;
+
   void push_heap(std::size_t index) {
-    while (_Cmp(heap.at(index), heap.at(parent_of(index)))) {
+    while (value_cmp(heap.at(index), heap.at(parent_of(index)))) {
       std::swap(heap.at(index), heap.at(parent_of(index)));
       index = parent_of(index);
     }
@@ -16,9 +18,9 @@ class BinaryHeap {
     auto left = left_of(index);
     while (left < size) {
       auto smaller_child_idx =
-          left + 1 < size && _Cmp(heap.at(left + 1), heap.at(left)) ? left + 1
+          left + 1 < size && value_cmp(heap.at(left + 1), heap.at(left)) ? left + 1
                                                                     : left;
-      auto smaller_idx = _Cmp(heap.at(smaller_child_idx), heap.at(index))
+      auto smaller_idx = value_cmp(heap.at(smaller_child_idx), heap.at(index))
                              ? smaller_child_idx
                              : index;
       if (smaller_idx == index) break;
@@ -30,9 +32,11 @@ class BinaryHeap {
 
   std::size_t left_of(std::size_t index) { return index * 2 + 1; }
 
-  std::size_t parent_of(std::size_t index) { return (index - 1) / 2; }
+  std::size_t parent_of(std::size_t index) { return index == 0 ? 0 : (index - 1) / 2; }
 
  public:
+  BinaryHeap() = default;
+
   void push(T& t) {
     heap.push_back(t);
     push_heap(heap.size() - 1);
