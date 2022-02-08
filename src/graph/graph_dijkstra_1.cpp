@@ -22,7 +22,7 @@ unordered_map<Node<int>*, int> dijkstra(Node<int>* node) {
     for (auto& edge : min_node->edges) {
       auto to_node = edge.to;
       // to_node没有处理过, 就直接设置距离
-      if (!node_set.count(to_node)) {
+      if (!distance_map.count(to_node)) {
         distance_map[to_node] = edge.weight + distance;
       } else {
         // to_node存在, 将距离设置为更短的
@@ -41,10 +41,10 @@ unordered_map<Node<int>*, int> dijkstra(Node<int>* node) {
  * @brief Get the min distance and unselected node object
  * 在距离表中选择一个最小距离且没有确定距离的节点
  * 这里其实也是在贪心
- * 
+ *
  * @param distance_map 距离表
  * @param node_set 确定距离的节点
- * @return Node<int>* 
+ * @return Node<int>*
  */
 Node<int>* get_min_distance_and_unselected_node(
     unordered_map<Node<int>*, int>& distance_map,
