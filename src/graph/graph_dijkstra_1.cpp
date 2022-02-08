@@ -13,7 +13,7 @@ unordered_map<Node<int>*, int> dijkstra(Node<int>* node) {
   // 存储node到其他节点的单元最短路径, 不存在表示无法到达理解为正无穷
   unordered_map<Node<int>*, int> distance_map;
   distance_map[node] = 0;  // 到self的距离是0
-  // 记录没选择的路径
+  // 记录选择的路径
   unordered_set<Node<int>*> node_set;
   // 获取没有确定距离的节点中最短路径节点
   auto min_node = get_min_distance_and_unselected_node(distance_map, node_set);
