@@ -2,6 +2,11 @@
 
 using namespace std;
 
+class A {
+ public:
+  int count;
+};
+
 int main() {
   ;
   ;
