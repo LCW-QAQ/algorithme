@@ -70,6 +70,7 @@ class LruCache {
   void insert(K&& key, V&& value) { insert(key, value); }
 
   void insert(K& key, V& value) {
+    if (capacity == 0) return;
     if (!cache.count(key)) {
       auto new_node = new Node(key, value);
       cache[key] = new_node;
