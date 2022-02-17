@@ -17,6 +17,22 @@ class LruCache {
   Node<K, V>*head, *tail;
   std::unordered_map<K, Node<K, V>*> cache;
 
+  LruCache(std::size_t capacity) : capacity(capacity) {
+    head = new Node<K, V>();
+    tail = new Node<K, V>();
+    head->next = tail;
+  }
+
+  ~LruCache() {
+    for (auto& [_, node] : cache) {
+      delete node;
+      node = nullptr;
+    }
+    delete head;
+    delete tail;
+    head = tail = nullptr;
+  }
+
   void add_to_head(Node<K, V>* node) {
     node->next = head->next;
     head->next->prev = node;
@@ -38,12 +54,6 @@ class LruCache {
   void move_to_head(Node<K, V>* node) {
     remove_node(node);
     add_to_head(node);
-  }
-
-  LruCache(std::size_t capacity) : capacity(capacity) {
-    head = new Node<K, V>();
-    tail = new Node<K, V>();
-    head->next = tail;
   }
 
   V& get(K&& key) { return get(key); }
@@ -79,16 +89,24 @@ class LruCache {
 
 /* int main() {
   using namespace std;
-  LruCache<int, int> cache{4};
-  for (int i = 0; i < 4; i++) {
-    cache.insert(i, i);
+  {
+    LruCache<int, int> cache{4};
+    for (int i = 0; i < 4; i++) {
+      cache.insert(i, i);
+    }
+    cache.insert(99, 99);
+    cache.insert(100, 100);
+    cache.get(2);
+    cache.insert(101, 101);
+    for (auto& [key, node] : cache.cache) {
+      cout << key << ":(" << node->key << ":" << node->value << ")" << endl;
+    }
   }
-  cache.insert(99, 99);
-  cache.insert(100, 100);
-  cache.get(2);
-  cache.insert(101, 101);
-  for (auto& [key, node] : cache.cache) {
-    cout << key << ":(" << node->key << ":" << node->value << ")" << endl;
+  while (true) {
+    LruCache<int, int> cache{50};
+    for (int i = 0; i < 100; i++) {
+      cache.insert(i, i);
+    }
   }
   return 0;
 } */
