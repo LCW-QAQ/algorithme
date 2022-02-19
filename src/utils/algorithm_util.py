@@ -22,13 +22,14 @@ def logit(logfile='out.log'):
     return logging_decorator
 
 
-def perf_stdout(fn=None, file=sys.stdout):
+def perf_stdout(fn=None, *, file=sys.stdout):
     def wrap(fn):
         @functools.wraps(fn)
         def wrapper(*args, **kwargs):
             start = time.perf_counter()
             res = fn(*args, **kwargs)
-            print(f"{fn.__module__}:{fn.__name__}, 耗时 {time.perf_counter() - start}", file=file)
+            print(
+                f"{fn.__module__}:{fn.__name__}, 耗时 {time.perf_counter() - start}", file=file)
             return res
 
         return wrapper
@@ -62,7 +63,8 @@ def gen_random_dimensional2_arr(inner_length: int, length: int = 1000, min_val: 
     """
     arr = []
     for i in range(length):
-        arr.append([random.randint(min_val, max_val) for _ in range(inner_length)])
+        arr.append([random.randint(min_val, max_val)
+                   for _ in range(inner_length)])
     return arr
 
 
@@ -73,13 +75,15 @@ def gen_random_alphabet_str_arr(min_str_len: int = 0, max_str_len: int = 10, len
     :param length: 随机数组长度
     """
     # 26个字母大小写
-    alphas = [chr(x) for x in range(ord("a"), ord("z") + 1)] + [chr(x) for x in range(ord("A"), ord("Z") + 1)]
+    alphas = [chr(x) for x in range(ord("a"), ord("z") + 1)] + \
+        [chr(x) for x in range(ord("A"), ord("Z") + 1)]
     # 打乱顺序
     random.shuffle(alphas)
 
     ans = []
     for _ in range(length):
-        random_str = "".join(random.choices(alphas, k=random.randint(min_str_len, max_str_len)))
+        random_str = "".join(random.choices(
+            alphas, k=random.randint(min_str_len, max_str_len)))
         ans.append(random_str)
 
     return ans
