@@ -28,7 +28,7 @@ public class AlgorithmUtil {
 
     public static int[] genRandomArray(int length, int minVal, int maxVal) {
         final Random r = new Random();
-        return Stream.generate(() -> r.nextInt(minVal, maxVal + 1))
+        return Stream.generate(() -> minVal + r.nextInt(maxVal - minVal))
                 .limit(length)
                 .mapToInt(Integer::intValue)
                 .toArray();

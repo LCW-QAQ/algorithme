@@ -1,6 +1,7 @@
 /out
-/.idea
+/**/.idea
 /**/*.exe
 /.vscode
 /**/*.pyc
 /**/__pycache__
+/pyenv
