@@ -167,9 +167,10 @@ def heap_sort(arr: List[int]):
             left = left_of(index)
 
     n = len(arr)
-    # 向下建堆 O(N*logN)
+    # 从上向下建堆 O(N*logN)
     # for i in range(n):
     #     heap_insert(arr, i)
+    # 从下向上建堆 O(N)
     for i in range(n-1, -1, -1):
         heapify(arr, i, n)
     # 将堆顶的最大值替换到数组最后（升序）
