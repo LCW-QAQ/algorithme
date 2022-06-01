@@ -5,7 +5,7 @@ package queue;
  * @email lcwliuchongwei@qq.com
  * @date 2022-01-15
  */
-public class MyArrayDequeue<T> {
+public class MyArrayDeque<T> {
     private Object[] elements;
 
     private int head;
@@ -14,7 +14,7 @@ public class MyArrayDequeue<T> {
 
     private static final int DEFAULT_QUEUE_CAPACITY = 8;
 
-    public MyArrayDequeue() {
+    public MyArrayDeque() {
         elements = new Object[DEFAULT_QUEUE_CAPACITY];
     }
 
@@ -89,7 +89,7 @@ public class MyArrayDequeue<T> {
     }
 
     public static void main(String[] args) {
-        final MyArrayDequeue<Integer> q = new MyArrayDequeue<>();
+        final MyArrayDeque<Integer> q = new MyArrayDeque<>();
         for (int i = 0; i < 10; i++) {
             q.pushBack(i);
         }
