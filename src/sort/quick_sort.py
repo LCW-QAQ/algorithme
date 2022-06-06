@@ -45,6 +45,38 @@ def quick_sort(arr: list[int]):
     process(arr, 0, len(arr) - 1)
 
 
+def quick_sort2(arr: list[int]):
+    """
+    分区时没有等于区的快排，写起来简单一些
+    """
+
+    def process2(arr, l, r):
+        if l >= r:
+            return
+        rand_idx = random.randint(l, r)
+        arr[rand_idx], arr[r] = arr[r], arr[rand_idx]
+
+        lt, gt = l, r
+        pivot = arr[r]
+        while lt < gt:
+            while arr[lt] <= pivot and lt < r:
+                lt += 1
+            while arr[gt] > pivot:
+                gt -= 1
+            if lt < gt:
+                arr[lt], arr[gt] = arr[gt], arr[lt]
+        arr[l], arr[gt] = arr[gt], arr[l]
+
+        process(arr, l, gt - 1)
+        process(arr, gt + 1, r)
+
+    n = len(arr)
+    if n < 2:
+        return
+
+    process2(arr, 0, n - 1)
+
+
 if __name__ == '__main__':
     arr = gen_random_arr(1000000)
     a1, a2 = arr.copy(), arr.copy()
